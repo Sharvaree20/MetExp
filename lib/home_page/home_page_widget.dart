@@ -167,7 +167,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           ),
                         ),
                         FutureBuilder<ApiCallResponse>(
-                          future: getDepartmentsCall(),
+                          future: getNFTCollectionsCall(),
                           builder: (context, snapshot) {
                             // Customize what your widget looks like when it's loading.
                             if (!snapshot.hasData) {
@@ -181,17 +181,17 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 ),
                               );
                             }
-                            final gridViewGetDepartmentsResponse =
+                            final gridViewGetNFTCollectionsResponse =
                                 snapshot.data;
                             return Builder(
                               builder: (context) {
-                                final departments = (getJsonField(
-                                                gridViewGetDepartmentsResponse
+                                final nftcollections = (getJsonField(
+                                                gridViewGetNFTCollectionsResponse
                                                     .jsonBody,
-                                                r'''$.departments''')
+                                                r'''$nftcollections''')
                                             ?.toList() ??
                                         [])
-                                    .take(30)
+                                    .take(10)
                                     .toList();
                                 return GridView.builder(
                                   padding: EdgeInsets.zero,
@@ -205,10 +205,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   primary: false,
                                   shrinkWrap: true,
                                   scrollDirection: Axis.vertical,
-                                  itemCount: departments.length,
-                                  itemBuilder: (context, departmentsIndex) {
-                                    final departmentsItem =
-                                        departments[departmentsIndex];
+                                  itemCount: nftcollections.length,
+                                  itemBuilder: (context, nftcollectionsIndex) {
+                                    final nftcollectionsItem =
+                                        nftcollections[nftcollectionsIndex];
                                     return InkWell(
                                       onTap: () async {
                                         await Navigator.push(
@@ -217,10 +217,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             builder: (context) =>
                                                 DepartmentHighlightsPageWidget(
                                               departmentId: getJsonField(
-                                                  departmentsItem,
+                                                  nftcollectionsItem,
                                                   r'''$.departmentId'''),
                                               displayName: getJsonField(
-                                                      departmentsItem,
+                                                      nftcollectionsItem,
                                                       r'''$.displayName''')
                                                   .toString(),
                                             ),
@@ -243,7 +243,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     5, 0, 5, 0),
                                             child: Text(
-                                              getJsonField(departmentsItem,
+                                              getJsonField(nftcollectionsItem,
                                                       r'''$.displayName''')
                                                   .toString(),
                                               textAlign: TextAlign.center,

@@ -61,3 +61,15 @@ Future<ApiCallResponse> departmentHighlightsCall({
     returnBody: true,
   );
 }
+
+Future<ApiCallResponse> getNFTCollectionsCall() {
+  return ApiManager.instance.makeApiCall(
+    callName: 'GetNFTCollections',
+    apiUrl:
+        'https://d63d3a98-e1df-4a69-96ba-c79eb441f59d.mock.pstmn.io/public/collection/v1/collections',
+    callType: ApiCallType.GET,
+    headers: {},
+    params: {},
+    returnBody: true,
+  );
+}
